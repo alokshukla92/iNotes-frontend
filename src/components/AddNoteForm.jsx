@@ -2,6 +2,8 @@ import React from "react";
 
 const AddNoteForm = () => {
   return (
+    <>
+    <div className="container my-3 mx-3"></div>
     <form>
       <h3>Add Notes</h3>
       <div className="mb-3">
@@ -42,6 +44,7 @@ const AddNoteForm = () => {
         Submit
       </button>
     </form>
+    </>
   );
 };
 

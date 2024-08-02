@@ -4,7 +4,8 @@ import noteContext from '../context/notes/noteContext';
 import AddNoteForm from './AddNoteForm';
 
 const Home = () => {
-  const data = useContext(noteContext);
+  const context = useContext(noteContext);
+  const {notes, setNotes} = context
 
   return (
     <div className='container my-3'>
@@ -12,7 +13,7 @@ const Home = () => {
         <h1>iNotes</h1>
       </div>
       <AddNoteForm />
-      <Notes notes={data.notes} />
+      <Notes notes={notes} />
     </div>
   );
 }
