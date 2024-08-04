@@ -1,8 +1,21 @@
-import React from "react";
+import React, {useContext, useEffect} from "react";
 import NoteItem from "./NoteItem";
 import AddNoteForm from './AddNoteForm';
+import noteContext from "../context/notes/noteContext";
 
-const Notes = ({notes}) => {
+const Notes = () => {
+  const context = useContext(noteContext);
+  const { notes, fetchAllNotes } = context || {}; 
+
+  useEffect(() => {
+    fetchAllNotes();
+  }, [])
+  
+  if (!context) {
+    console.error('Note context not found!');
+    return null; 
+  }
+
   return (
     <div className="container my-3">
       <AddNoteForm />
