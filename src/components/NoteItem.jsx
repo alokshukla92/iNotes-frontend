@@ -11,7 +11,7 @@ const NoteItem = ({ dataObj }) => {
   }
 
   return (
-    <div className="card my-3 mx-3" style={{ width: "18rem" }}>
+    <div className="card my-3">
       <div className="card-body">
         <div className="d-flex align-items-center">
           <h5 className="card-title mb-0 me-2">{dataObj.title}</h5>
