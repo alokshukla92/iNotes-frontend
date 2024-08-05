@@ -132,7 +132,7 @@ function Signup() {
             required
           />
         </div>
-        <button type="submit" disabled={formData.password.length < 5 || formData.password !== formData.confirmPassword} className="btn btn-primary">Submit</button>
+        <button type="submit" disabled={formData.password.length < 5 || formData.password !== formData.confirmPassword} className="btn btn-primary">Signup</button>
       </form>
     </div>
   );

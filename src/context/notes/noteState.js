@@ -7,7 +7,7 @@ const NoteState = (props) => {
 
     const fetchAllNotes = async () => {
       const myHeaders = new Headers();
-      myHeaders.append("auth-token", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjZhYjQ0YzhjMDk1ZDBjMmRjOTRhNGYzIn0sImlhdCI6MTcyMjUzNDA1M30.bjaIRmqHiAhznGwvFMid5w_Oy5EQB0o7e4GowtkccPg");
+      myHeaders.append("auth-token", localStorage.getItem("token"));
 
       const requestOptions = {
         method: "GET",
@@ -22,7 +22,7 @@ const NoteState = (props) => {
     const addNote = async ({title, description, tag="General"})=>{
       const myHeaders = new Headers();
       myHeaders.append("Content-Type", "application/json");
-      myHeaders.append("auth-token", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjZhYjQ0YzhjMDk1ZDBjMmRjOTRhNGYzIn0sImlhdCI6MTcyMjUzNDA1M30.bjaIRmqHiAhznGwvFMid5w_Oy5EQB0o7e4GowtkccPg");
+      myHeaders.append("auth-token", localStorage.getItem("token"));
 
       const requestOptions = {
         method: "POST",
@@ -46,7 +46,7 @@ const NoteState = (props) => {
       setNotes(newNotes)
 
       const myHeaders = new Headers();
-      myHeaders.append("auth-token", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjZhYjQ0YzhjMDk1ZDBjMmRjOTRhNGYzIn0sImlhdCI6MTcyMjUzNDA1M30.bjaIRmqHiAhznGwvFMid5w_Oy5EQB0o7e4GowtkccPg");
+      myHeaders.append("auth-token", localStorage.getItem("token"));
 
       const requestOptions = {
         method: "DELETE",
@@ -73,7 +73,7 @@ const NoteState = (props) => {
       
       const myHeaders = new Headers();
       myHeaders.append("Content-Type", "application/json");
-      myHeaders.append("auth-token", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjZhYjQ0YzhjMDk1ZDBjMmRjOTRhNGYzIn0sImlhdCI6MTcyMjUzNDA1M30.bjaIRmqHiAhznGwvFMid5w_Oy5EQB0o7e4GowtkccPg");
+      myHeaders.append("auth-token", localStorage.getItem("token"));
 
       
       const requestOptions = {

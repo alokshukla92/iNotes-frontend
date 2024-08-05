@@ -1,10 +1,16 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
 import { ToastContainer } from 'react-toastify';
+import {useNavigate} from 'react-router-dom';
 
 export default function Navbar() {
   const location = useLocation();
 
+  let navigate = useNavigate();
+  const handleLogout = () => {
+    localStorage.removeItem("token")
+    navigate("/login")
+  }
   return (
     <>
     <ToastContainer />
@@ -49,10 +55,13 @@ export default function Navbar() {
             </li>
           </ul>
 
-          <form className="form-inline my-2 my-lg-0 mx-2">
+          {!localStorage.getItem("token")?<form className="form-inline my-2 my-lg-0 mx-2">
             <Link className="btn btn-primary mx-2" to="/login" role="button">Login</Link>
             <Link className="btn btn-primary mx-2" to="/signup" role="button">SignUp</Link>
-          </form>
+            </form>:
+            <button className="btn btn-primary mx-2" onClick={handleLogout} >Logout</button>
+          }
+          
 
         </div>
       </div>
