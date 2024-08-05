@@ -1,10 +1,13 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
+import { ToastContainer } from 'react-toastify';
 
 export default function Navbar() {
   const location = useLocation();
 
   return (
+    <>
+    <ToastContainer />
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
       <div className="container-fluid">
         <Link className="navbar-brand" to="/">
@@ -45,8 +48,15 @@ export default function Navbar() {
               </Link>
             </li>
           </ul>
+
+          <form className="form-inline my-2 my-lg-0 mx-2">
+            <Link className="btn btn-primary mx-2" to="/login" role="button">Login</Link>
+            <Link className="btn btn-primary mx-2" to="/signup" role="button">SignUp</Link>
+          </form>
+
         </div>
       </div>
     </nav>
+    </>
   );
 }
