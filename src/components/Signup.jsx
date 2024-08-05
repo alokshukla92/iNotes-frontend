@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import {useNavigate} from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 function Signup() {
@@ -7,58 +7,67 @@ function Signup() {
     name: '',
     email: '',
     password: '',
-    showPassword: false 
+    confirmPassword: '',
+    showPassword: false,
   });
 
   const handleChange = (e) => {
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     });
   };
 
   const togglePasswordVisibility = () => {
     setFormData({
       ...formData,
-      showPassword: !formData.showPassword
+      showPassword: !formData.showPassword,
     });
   };
 
   let navigate = useNavigate();
-  const hostname = "http://localhost:5000"
+  const hostname = "http://localhost:5000";
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle form submission logic here, e.g., API calls, validation, etc.
+    
+    if (formData.password !== formData.confirmPassword) {
+      toast("Passwords do not match");
+      return;
+    }
 
     const myHeaders = new Headers();
-        myHeaders.append("Content-Type", "application/json");    
-        const requestOptions = {
-        method: "POST",
-        headers: myHeaders,
-        body : JSON.stringify(
-            formData
-        )
-        };
-        const response = await fetch(`${hostname}/api/auth/createuser`, requestOptions)
-        const json = await response.json()
-        console.log(json);
-        if(json.success){
-            localStorage.setItem('token' , json.authtoken);
-            navigate("/");
-        }
-        else{
-            console.log(json.error);
-            toast(json.error)
-        }
+    myHeaders.append("Content-Type", "application/json");
+    const requestOptions = {
+      method: "POST",
+      headers: myHeaders,
+      body: JSON.stringify(formData),
+    };
 
-    // console.log('Form submitted with:', formData);
-    setFormData({
-      name: '',
-      email: '',
-      password: '',
-      showPassword: false
-    });
+    try {
+      const response = await fetch(`${hostname}/api/auth/createuser`, requestOptions);
+      const json = await response.json();
+      console.log(json);
+      
+      if (json.success) {
+        localStorage.setItem('token', json.authtoken);
+        navigate("/");
+      } else {
+        console.log(json.error);
+        toast(json.error);
+      }
+
+      setFormData({
+        name: '',
+        email: '',
+        password: '',
+        confirmPassword: '',
+        showPassword: false,
+      });
+    } catch (error) {
+      console.error('Error occurred:', error);
+      toast('An error occurred. Please try again later.');
+    }
   };
 
   return (
@@ -111,7 +120,19 @@ function Signup() {
             </button>
           </div>
         </div>
-        <button type="submit" disabled={formData.password.length < 5} className="btn btn-primary">Submit</button>
+        <div className="mb-3">
+          <label htmlFor="inputConfirmPassword" className="form-label">Confirm Password</label>
+          <input
+            type="password"
+            className="form-control"
+            id="inputConfirmPassword"
+            name="confirmPassword"
+            value={formData.confirmPassword}
+            onChange={handleChange}
+            required
+          />
+        </div>
+        <button type="submit" disabled={formData.password.length < 5 || formData.password !== formData.confirmPassword} className="btn btn-primary">Submit</button>
       </form>
     </div>
   );
