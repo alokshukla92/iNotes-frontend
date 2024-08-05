@@ -1,6 +1,9 @@
 import React from 'react';
 import Notes from './Notes';
 
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 const Home = () => {
   
   return (
@@ -8,6 +11,7 @@ const Home = () => {
       <div className='text-center my-3'>
         <h1>iNotes</h1>
       </div>
+      <ToastContainer />
       <Notes />
     </div>
   );
